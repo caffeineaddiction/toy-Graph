@@ -72,4 +72,3 @@ class toyGraph
     @context.lineWidth = @Stroke_Width * 2
     @context.strokeStyle = '#aaaaaa'
     @context.stroke()
-    # Draw Text
