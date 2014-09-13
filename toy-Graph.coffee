@@ -19,7 +19,8 @@ class toyGraph
     aData_Min = 0
     aData_Max = 0
     aData_Avg = 0
-    for n in aData
+    for i in aData
+      n = -i
       aData_Avg += n
       aData_Min = n if n < aData_Min
       aData_Max = n if n > aData_Max
@@ -39,9 +40,16 @@ class toyGraph
     @context.beginPath()
     idxi = (@Graph_X_Max - @Graph_X_Min) / aData.length
     idx = @Graph_X_Min + ( idxi / 2 )
-    @context.moveTo( idx , (( -aData[0] * @Graph_Y_Max) / local_Max ) + @Graph_Y_Max + (@Graph_Y_Min / 2) )
-    for n in aData
-      @context.lineTo( idx , (( -n * @Graph_Y_Max) / local_Max ) + @Graph_Y_Max + (@Graph_Y_Min / 2) )
+    v = ((-aData[0] + local_mod) * @Graph_Y_Max) / local_Max
+    @context.moveTo(idx,v + (@Graph_Y_Min / 2))
+    #@context.moveTo( idx , (( -aData[0] * @Graph_Y_Max) / local_Max ) + @Graph_Y_Max + (@Graph_Y_Min / 2) )
+    for i in aData
+      n = -i
+      #@context.lineTo( idx , (( -n * @Graph_Y_Max) / local_Max ) + @Graph_Y_Max + (@Graph_Y_Min / 2) )
+      v = ((n + local_mod) * @Graph_Y_Max) / local_Max
+      #if Math.abs(n - aData_Avg) > Math.abs(n + aData_Avg) / 2
+      #  v = 0
+      @context.lineTo(idx,v + (@Graph_Y_Min / 2))
       idx += idxi
     @context.lineWidth = @Stroke_Width
     @context.strokeStyle = aColor || '#aaaaaa'
@@ -65,19 +73,3 @@ class toyGraph
     @context.strokeStyle = '#aaaaaa'
     @context.stroke()
     # Draw Text
-
-
-## Testing ------------------------------------------------------
-tData = []
-for i in [0..2] by 0.02
-  tData.push( 1 + Math.sin(i * Math.PI))
-
-foo = new toyGraph('toyGraph')
-foo.draw(tData)
-
-foobar = () =>
-  tData.push(tData.shift())
-  foo.draw(tData)
-
-setInterval( foobar , 1000 / 30 )
-## ---------------------------------------------------------- ###
