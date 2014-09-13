@@ -42,13 +42,9 @@ class toyGraph
     idx = @Graph_X_Min + ( idxi / 2 )
     v = ((-aData[0] + local_mod) * @Graph_Y_Max) / local_Max
     @context.moveTo(idx,v + (@Graph_Y_Min / 2))
-    #@context.moveTo( idx , (( -aData[0] * @Graph_Y_Max) / local_Max ) + @Graph_Y_Max + (@Graph_Y_Min / 2) )
     for i in aData
       n = -i
-      #@context.lineTo( idx , (( -n * @Graph_Y_Max) / local_Max ) + @Graph_Y_Max + (@Graph_Y_Min / 2) )
       v = ((n + local_mod) * @Graph_Y_Max) / local_Max
-      #if Math.abs(n - aData_Avg) > Math.abs(n + aData_Avg) / 2
-      #  v = 0
       @context.lineTo(idx,v + (@Graph_Y_Min / 2))
       idx += idxi
     @context.lineWidth = @Stroke_Width
