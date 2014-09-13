@@ -9,20 +9,47 @@ foo = new toyGraph('<dom element ID of canvas>', [color])
 foo.draw([1,2,3,4,5])
 ```
 
-```coffee
-# CoffeeScript example Code
-tData = []
-for i in [0..2] by 0.02
-  tData.push( 1 + Math.sin(i * Math.PI))
+```javascript
+sData = [];
+cData = [];
+tData = [];
 
-foo = new toyGraph('toyGraph')
-foo.draw(tData)
+for (i = _i = 0; _i <= 2; i = _i += 0.02) {
+  sData.push(1 + Math.sin(i * Math.PI));
+}
 
-foobar = () =>
-  tData.push(tData.shift())
-  foo.draw(tData)
+for (i = _i = 0; _i <= 2; i = _i += 0.02) {
+  cData.push(Math.cos(i * Math.PI));
+}
 
-setInterval( foobar , 1000 / 30 )
+for (i = _i = 0; _i <= 2; i = _i += 0.02) {
+  v = Math.tan(i * Math.PI);
+  if (v > 20) { v = 0};
+  if (v < -20) {v = 0};
+  tData.push(v);
+}
+
+foo = new toyGraph('toyGraphSIN');
+foo.draw(sData);
+
+bar = new toyGraph('toyGraphCOS');
+bar.draw(cData);
+
+baz = new toyGraph('toyGraphTAN');
+baz.draw(tData);
+
+foobar = (function(_this) {
+  return function() {
+    sData.push(sData.shift());
+    cData.push(cData.shift());
+    tData.push(tData.shift());
+    foo.draw(sData);
+    bar.draw(cData);
+    baz.draw(tData);
+  };
+})(this);
+
+setInterval(foobar, 1000 / 30);
 ```
 Result:
 
