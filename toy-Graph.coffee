@@ -57,8 +57,7 @@ class toyGraph
     @context.textAlign = 'left'
     @context.fillStyle = '#aaaaaa'
     @context.strokeStyle = '#000000'
-    #tCurrent = aData[aData.length - 1].toFixed(2)
-    tCurrent = aData[aData.length - 1]
+    tCurrent = aData[aData.length - 1].toFixed(2)
     tX = @width - (@context.measureText(tCurrent).width + (@Stroke_Width * 2))
     tY = 15 + (@Stroke_Width * 2)
     @context.strokeText(tCurrent, tX , tY )
