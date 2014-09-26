@@ -65,7 +65,7 @@
       this.context.textAlign = 'left';
       this.context.fillStyle = '#aaaaaa';
       this.context.strokeStyle = '#000000';
-      tCurrent = aData[aData.length - 1];
+      tCurrent = aData[aData.length - 1].toFixed(2);
       tX = this.width - (this.context.measureText(tCurrent).width + (this.Stroke_Width * 2));
       tY = 15 + (this.Stroke_Width * 2);
       this.context.strokeText(tCurrent, tX, tY);
