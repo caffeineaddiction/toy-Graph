@@ -15,19 +15,21 @@ class toyGraph
     return
 
   draw: (aData,aColor) ->
-    # Check Data
-    aData_Min = 0
-    aData_Max = 0
-    aData_Avg = 0
+    #tData = fix(aData,@Graph_X_Max,@Graph_X_Max)
+    tMax = -aData[0]
+    tMin = -aData[0]
     for i in aData
       n = -i
-      aData_Avg += n
-      aData_Min = n if n < aData_Min
-      aData_Max = n if n > aData_Max
-    aData_Avg = aData_Avg / aData.length
-    local_mod = 0 - aData_Min
-    local_Max = aData_Max + local_mod
-    local_Min = aData_Min + local_mod
+      if n > tMax
+        tMax = n
+      if n < tMin
+        tMin = n
+    tDif = 0 - tMin
+    tSca = (tMax + tDif) / (@Graph_Y_Max - @Graph_Y_Min)
+    tData = []
+    for i in aData
+      n = -i
+      tData.push(((n + tDif ) / tSca) + @Graph_Y_Min ) 
     # Clear Canvas
     @context.clearRect(0,0,@width,@height)
     # Draw Background
@@ -40,12 +42,10 @@ class toyGraph
     @context.beginPath()
     idxi = (@Graph_X_Max - @Graph_X_Min) / aData.length
     idx = @Graph_X_Min + ( idxi / 2 )
-    v = ((-aData[0] + local_mod) * @Graph_Y_Max) / local_Max
-    @context.moveTo(idx,v + (@Graph_Y_Min / 2))
-    for i in aData
-      n = -i
-      v = ((n + local_mod) * @Graph_Y_Max) / local_Max
-      @context.lineTo(idx,v + (@Graph_Y_Min / 2))
+    @context.moveTo(idx, tData[0] )
+    for i in tData
+      n = i
+      @context.lineTo(idx, n )
       idx += idxi
     @context.lineWidth = @Stroke_Width
     @context.strokeStyle = aColor || '#aaaaaa'
@@ -57,7 +57,8 @@ class toyGraph
     @context.textAlign = 'left'
     @context.fillStyle = '#aaaaaa'
     @context.strokeStyle = '#000000'
-    tCurrent = aData[aData.length - 1].toFixed(2)
+    #tCurrent = aData[aData.length - 1].toFixed(2)
+    tCurrent = aData[aData.length - 1]
     tX = @width - (@context.measureText(tCurrent).width + (@Stroke_Width * 2))
     tY = 15 + (@Stroke_Width * 2)
     @context.strokeText(tCurrent, tX , tY )
