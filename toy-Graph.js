@@ -80,5 +80,7 @@
     return toyGraph;
 
   })();
+  
+  window.toyGraph = toyGraph;
 
 }).call(this);
