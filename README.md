@@ -51,11 +51,7 @@ foobar = (function(_this) {
 
 setInterval(foobar, 1000 / 30);
 ```
-Result:
-
-![result of example code](https://dl.dropboxusercontent.com/u/7308460/images/toy-Graph.PNG)
-
-
+Example: http://caffeineaddiction.github.io/toy-Graph/
 
 ##API
 **soon**
