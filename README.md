@@ -9,6 +9,8 @@ foo = new toyGraph('<dom element ID of canvas>', [color])
 foo.draw([1,2,3,4,5])
 ```
 
+Example: http://caffeineaddiction.github.io/toy-Graph/
+
 ```javascript
 sData = [];
 cData = [];
@@ -51,7 +53,6 @@ foobar = (function(_this) {
 
 setInterval(foobar, 1000 / 30);
 ```
-Example: http://caffeineaddiction.github.io/toy-Graph/
 
 ##API
 **soon**
